@@ -8,7 +8,7 @@ const BaseCard = ({ children, className }: BaseCardProps) => {
   return (
     <div
       className={cn(
-        " p-4 border border-gray-200 rounded-lg shadow-sm",
+        "p-4 border border-gray-200 rounded-lg shadow-sm bg-white",
         className
       )}
     >

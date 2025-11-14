@@ -8,29 +8,60 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-const BasePagination = () => {
+type Props = {
+  pages: (number | "...")[];
+  currentPage: number;
+  onChange: (page: number) => void;
+  totalPages: number;
+};
+
+const BasePagination = ({
+  pages,
+  currentPage,
+  onChange,
+  totalPages,
+}: Props) => {
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious
+            href="#"
+            onClick={() => onChange(currentPage - 1)}
+            aria-disabled={currentPage === 1}
+            className={
+              currentPage === 1 ? "pointer-events-none opacity-50" : ""
+            }
+          />
         </PaginationItem>
+
+        {pages.map((p, index) =>
+          p === "..." ? (
+            <PaginationItem key={`ellipsis-${index}`}>
+              <PaginationEllipsis />
+            </PaginationItem>
+          ) : (
+            <PaginationItem key={p}>
+              <PaginationLink
+                href="#"
+                isActive={p === currentPage}
+                onClick={() => onChange(p)}
+              >
+                {p}
+              </PaginationLink>
+            </PaginationItem>
+          )
+        )}
+
         <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext
+            href="#"
+            onClick={() => onChange(currentPage + 1)}
+            aria-disabled={currentPage === totalPages}
+            className={
+              currentPage === totalPages ? "pointer-events-none opacity-50" : ""
+            }
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

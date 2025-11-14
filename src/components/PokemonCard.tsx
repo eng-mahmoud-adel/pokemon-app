@@ -16,7 +16,7 @@ const PokemonCard = ({ pokemonName, pokemonId }: PokemonCardProps) => {
           className="absolute size-full object-contain"
         />
       </div>
-      <h5 className="text-lg font-bold">{pokemonName}</h5>
+      <h5 className="text-lg font-bold capitalize">{pokemonName}</h5>
       <p className="text-sm text-gray-500">#{pokemonId}</p>
     </BaseCard>
   );

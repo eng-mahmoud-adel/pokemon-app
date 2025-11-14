@@ -5,7 +5,7 @@ import { SkeletonCard } from "@/components/SkeletonCard";
 
 const PokemonListPage = () => {
   return (
-    <>
+    <div className="bg-indigo-100 p-6">
       <Suspense
         fallback={
           <div className="grid grid-cols-4 gap-4">
@@ -19,7 +19,7 @@ const PokemonListPage = () => {
           <PokemonList />
         </ErrorBoundary>
       </Suspense>
-    </>
+    </div>
   );
 };
 
