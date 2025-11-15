@@ -27,7 +27,7 @@ const BasePagination = ({
     `/pokemon?limit=${limit}&offset=${(page - 1) * limit}`;
 
   return (
-    <Pagination>
+    <Pagination className="overflow-x-auto">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious

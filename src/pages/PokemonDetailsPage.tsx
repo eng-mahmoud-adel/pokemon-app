@@ -9,8 +9,9 @@ import { SkeletonCard } from "@/components/SkeletonCard";
 
 const PokemonDetailsPage = () => {
   const navigate = useNavigate();
+
   return (
-    <div className="bg-fuchsia-100 p-6">
+    <div className="min-h-dvh bg-fuchsia-100 p-6 space-y-2">
       <Button
         variant={"outline"}
         className="cursor-pointer"

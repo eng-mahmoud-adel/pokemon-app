@@ -24,10 +24,10 @@ const PokemonListPaginiatedPage = () => {
   }, [params, navigate]);
 
   return (
-    <div className="bg-indigo-100 p-6">
+    <>
       <Suspense
         fallback={
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {Array.from({ length: PAGINATION_LIMIT }, (_, index) => (
               <SkeletonCard key={index} />
             ))}
@@ -38,7 +38,7 @@ const PokemonListPaginiatedPage = () => {
           <PokemonListPaginiated />
         </ErrorBoundary>
       </Suspense>
-    </div>
+    </>
   );
 };
 
