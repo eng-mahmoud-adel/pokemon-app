@@ -13,6 +13,7 @@ function App() {
       <Route path="/" element={<Navigate to="/pokemon/pagination" replace />} />
 
       <Route path="/pokemon" element={<PokemonLayout />}>
+        <Route index element={<Navigate to="pagination" replace />} />
         <Route path="pagination" element={<PokemonListPaginiatedPage />} />
         <Route path="infinite" element={<PokemonListInfinitePage />} />
       </Route>

@@ -24,7 +24,7 @@ const BasePagination = ({
   limit,
 }: Props) => {
   const createUrl = (page: number) =>
-    `/pokemon?limit=${limit}&offset=${(page - 1) * limit}`;
+    `/pokemon/pagination?limit=${limit}&offset=${(page - 1) * limit}`;
 
   return (
     <Pagination className="overflow-x-auto">
