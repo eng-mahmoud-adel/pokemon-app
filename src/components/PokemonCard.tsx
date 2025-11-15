@@ -12,7 +12,7 @@ const PokemonCard = ({ pokemonName, pokemonId }: PokemonCardProps) => {
       <div className="relative w-full h-48 bg-gray-100 rounded-md">
         <img
           src={`${POKEMON_SPRITE_URL}/${pokemonId}.png`}
-          alt=""
+          alt="pokemon_img"
           className="absolute size-full object-contain"
         />
       </div>

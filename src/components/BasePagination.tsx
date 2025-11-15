@@ -13,6 +13,7 @@ type Props = {
   currentPage: number;
   onChange: (page: number) => void;
   totalPages: number;
+  limit: number;
 };
 
 const BasePagination = ({
@@ -20,14 +21,21 @@ const BasePagination = ({
   currentPage,
   onChange,
   totalPages,
+  limit,
 }: Props) => {
+  const createUrl = (page: number) =>
+    `/pokemon?limit=${limit}&offset=${(page - 1) * limit}`;
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            href="#"
-            onClick={() => onChange(currentPage - 1)}
+            href={createUrl(currentPage - 1)}
+            onClick={(e) => {
+              e.preventDefault();
+              onChange(currentPage - 1);
+            }}
             aria-disabled={currentPage === 1}
             className={
               currentPage === 1 ? "pointer-events-none opacity-50" : ""
@@ -43,9 +51,12 @@ const BasePagination = ({
           ) : (
             <PaginationItem key={p}>
               <PaginationLink
-                href="#"
+                href={createUrl(p)}
                 isActive={p === currentPage}
-                onClick={() => onChange(p)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onChange(p);
+                }}
               >
                 {p}
               </PaginationLink>
@@ -55,8 +66,11 @@ const BasePagination = ({
 
         <PaginationItem>
           <PaginationNext
-            href="#"
-            onClick={() => onChange(currentPage + 1)}
+            href={createUrl(currentPage + 1)}
+            onClick={(e) => {
+              e.preventDefault();
+              onChange(currentPage + 1);
+            }}
             aria-disabled={currentPage === totalPages}
             className={
               currentPage === totalPages ? "pointer-events-none opacity-50" : ""

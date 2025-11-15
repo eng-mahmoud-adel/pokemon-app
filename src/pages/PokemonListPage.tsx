@@ -1,9 +1,28 @@
+import { Suspense, useEffect } from "react";
 import PokemonList from "@/components/PokemonList";
-import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { SkeletonCard } from "@/components/SkeletonCard";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { PAGINATION_LIMIT, PAGINATION_OFFSET } from "@/lib/constants";
 
 const PokemonListPage = () => {
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const limit = params.get("limit");
+    const offset = params.get("offset");
+
+    if (!limit || !offset) {
+      navigate(
+        `/pokemon?limit=${PAGINATION_LIMIT}&offset=${PAGINATION_OFFSET}`,
+        {
+          replace: true,
+        }
+      );
+    }
+  }, [params, navigate]);
+
   return (
     <div className="bg-indigo-100 p-6">
       <Suspense

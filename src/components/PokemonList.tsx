@@ -1,23 +1,34 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 import { usePokemonList } from "@/api/pokemon/hooks/usePokemonList";
 import PokemonCard from "./PokemonCard";
 import BasePagination from "./BasePagination";
 import { usePagination } from "@/hooks/usePagination";
-import { PAGINATION_LIMIT } from "@/lib/constants";
+import { PAGINATION_LIMIT, PAGINATION_OFFSET } from "@/lib/constants";
+import { useUrlSearchParams } from "@/hooks/useUrlSearchParams";
 
 const PokemonList = () => {
-  const [page, setPage] = useState(1);
+  const { searchParams, updateParams } = useUrlSearchParams();
 
-  const offset = (page - 1) * PAGINATION_LIMIT;
+  const limit = Number(searchParams.get("limit") ?? PAGINATION_LIMIT);
+  const offset = Number(searchParams.get("offset") ?? PAGINATION_OFFSET);
 
-  const { data } = usePokemonList({ limit: PAGINATION_LIMIT, offset });
+  const currentPage = Math.floor(offset / limit) + 1;
+
+  const { data } = usePokemonList({ limit, offset });
 
   const { pages, totalPages } = usePagination({
     total: data.count,
     limit: PAGINATION_LIMIT,
-    currentPage: page,
+    currentPage,
     siblingCount: 1,
   });
+
+  const changePage = (newPage: number) => {
+    updateParams({
+      limit,
+      offset: (newPage - 1) * limit,
+    });
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -25,21 +36,22 @@ const PokemonList = () => {
         {data.results.map((pokemon) => {
           const pokemonId = pokemon.url.split("/").filter(Boolean).pop();
           return (
-            <a href={pokemon.url} key={pokemon.name}>
+            <Link to={`/pokemon/${pokemonId}`} key={pokemon.name}>
               <PokemonCard
                 pokemonName={pokemon.name}
                 pokemonId={Number(pokemonId)}
               />
-            </a>
+            </Link>
           );
         })}
       </div>
 
       <BasePagination
         pages={pages}
-        currentPage={page}
+        currentPage={currentPage}
         totalPages={totalPages}
-        onChange={setPage}
+        onChange={changePage}
+        limit={limit}
       />
     </div>
   );
