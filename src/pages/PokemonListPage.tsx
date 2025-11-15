@@ -1,8 +1,8 @@
 import { Suspense, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import PokemonList from "@/components/PokemonList";
 import { ErrorBoundary } from "react-error-boundary";
 import { SkeletonCard } from "@/components/SkeletonCard";
-import { useSearchParams, useNavigate } from "react-router-dom";
 import { PAGINATION_LIMIT, PAGINATION_OFFSET } from "@/lib/constants";
 
 const PokemonListPage = () => {
@@ -28,7 +28,7 @@ const PokemonListPage = () => {
       <Suspense
         fallback={
           <div className="grid grid-cols-4 gap-4">
-            {Array.from({ length: 20 }, (_, index) => (
+            {Array.from({ length: PAGINATION_LIMIT }, (_, index) => (
               <SkeletonCard key={index} />
             ))}
           </div>

@@ -17,7 +17,21 @@ export interface PokemonDetails {
   weight: number;
   base_experience: number;
   abilities: Ability[];
+  sprites: {
+    other: {
+      "official-artwork": {
+        front_default: string;
+      };
+    };
+  };
+  types: Type[];
   stats: Stat[];
+}
+
+interface Type {
+  type: {
+    name: string;
+  };
 }
 
 interface Ability {
