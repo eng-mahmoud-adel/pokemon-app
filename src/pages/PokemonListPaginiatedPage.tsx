@@ -5,7 +5,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { SkeletonCard } from "@/components/SkeletonCard";
 import { PAGINATION_LIMIT, PAGINATION_OFFSET } from "@/lib/constants";
 
-const PokemonListPage = () => {
+const PokemonListPaginiatedPage = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const PokemonListPage = () => {
 
     if (!limit || !offset) {
       navigate(
-        `/pokemon?limit=${PAGINATION_LIMIT}&offset=${PAGINATION_OFFSET}`,
+        `/pokemon/pagination?limit=${PAGINATION_LIMIT}&offset=${PAGINATION_OFFSET}`,
         {
           replace: true,
         }
@@ -42,4 +42,4 @@ const PokemonListPage = () => {
   );
 };
 
-export default PokemonListPage;
+export default PokemonListPaginiatedPage;
