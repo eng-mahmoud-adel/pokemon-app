@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getPokemonList } from "../getPokemonList";
 
-export const usePokemonList = ({
+export const usePaginatedPokemonList = ({
   limit,
   offset,
 }: {

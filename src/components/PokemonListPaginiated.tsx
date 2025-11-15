@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { usePokemonList } from "@/api/pokemon/hooks/usePokemonList";
+import { usePaginatedPokemonList } from "@/api/pokemon/hooks/usePaginatedPokemonList";
 import PokemonCard from "./PokemonCard";
 import BasePagination from "./BasePagination";
 import { usePagination } from "@/hooks/usePagination";
 import { PAGINATION_LIMIT, PAGINATION_OFFSET } from "@/lib/constants";
 import { useUrlSearchParams } from "@/hooks/useUrlSearchParams";
 
-const PokemonList = () => {
+const PokemonListPaginiated = () => {
   const { searchParams, updateParams } = useUrlSearchParams();
 
   const limit = Number(searchParams.get("limit") ?? PAGINATION_LIMIT);
@@ -14,7 +14,7 @@ const PokemonList = () => {
 
   const currentPage = Math.floor(offset / limit) + 1;
 
-  const { data } = usePokemonList({ limit, offset });
+  const { data } = usePaginatedPokemonList({ limit, offset });
 
   const { pages, totalPages } = usePagination({
     total: data.count,
@@ -57,4 +57,4 @@ const PokemonList = () => {
   );
 };
 
-export default PokemonList;
+export default PokemonListPaginiated;

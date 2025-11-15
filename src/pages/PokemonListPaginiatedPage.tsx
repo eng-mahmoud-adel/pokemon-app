@@ -1,6 +1,6 @@
 import { Suspense, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import PokemonList from "@/components/PokemonList";
+import PokemonListPaginiated from "@/components/PokemonListPaginiated";
 import { ErrorBoundary } from "react-error-boundary";
 import { SkeletonCard } from "@/components/SkeletonCard";
 import { PAGINATION_LIMIT, PAGINATION_OFFSET } from "@/lib/constants";
@@ -35,7 +35,7 @@ const PokemonListPaginiatedPage = () => {
         }
       >
         <ErrorBoundary fallback={<div>Something went wrong</div>}>
-          <PokemonList />
+          <PokemonListPaginiated />
         </ErrorBoundary>
       </Suspense>
     </div>
